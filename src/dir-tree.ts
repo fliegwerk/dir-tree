@@ -3,6 +3,21 @@ import { parse, join, resolve, dirname } from 'path';
 import { constants } from 'fs';
 import { TreeElement } from './tree-element';
 
+/**
+ * Builds an object representation of the file tree, starting at the passed `path`.
+ *
+ * @param path The path to the root of the tree
+ * @returns an object representation of the `path` and all its children
+ *
+ * @example ```js
+ * const dirTree = require('@fliegwerk/dir-tree');
+ * const { join } = require('path');
+ *
+ * const tree = await dirTree(
+ *   join(__dirname, 'template')
+ * );
+ * ```
+ */
 export async function dirTree(path: string): Promise<TreeElement> {
 	path = resolve(process.cwd(), path);
 	const { base: name, ext } = parse(path);
