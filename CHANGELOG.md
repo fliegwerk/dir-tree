@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://github.com/fliegwerk/dir-tree/compare/v0.2.0...v0.2.1) (2022-02-07)
+
+
+### Bug Fixes
+
+* **ci:** Fix release workflow ([9275ccc](https://github.com/fliegwerk/dir-tree/commit/9275cccbfb0a83af1cffa810d085f47ffc483a57))
+
 ## 0.2.0 (2022-02-07)
 
 
