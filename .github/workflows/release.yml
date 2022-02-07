@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Run release-please action
         uses: google-github-actions/release-please-action@v3
+        id: release
         with:
           release-type: node
           package-name: release-please-action
