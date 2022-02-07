@@ -6,7 +6,7 @@ import { TreeElement } from './tree-element';
 /**
  * Builds an object representation of the file tree, starting at the passed `path`.
  *
- * @param path The path to the root of the tree
+ * @param path the path to the root of the tree
  * @returns an object representation of the `path` and all its children
  *
  * @example ```js
