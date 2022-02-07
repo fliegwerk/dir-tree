@@ -2,7 +2,7 @@
 	"name": "@fliegwerk/dir-tree",
 	"description": "Recursively parses a directory and returns the content as an object",
 	"license": "MIT",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"homepage": "https://www.fliegwerk.com/",
 	"main": "build/index.js",
 	"module": "build/index.es.js",
