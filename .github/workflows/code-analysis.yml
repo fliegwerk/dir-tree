@@ -1,0 +1,86 @@
+name: Code Analysis
+
+permissions:
+  security-events: write
+
+# Events that trigger this workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '26 9 * * 4'
+
+jobs:
+  codeql-analysis:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 📥
+        uses: actions/checkout@v2.4.0
+
+      # Initializes the CodeQL tools for scanning.
+      - name: Initialize CodeQL 📀
+        uses: github/codeql-action/init@v1
+        with:
+          languages: javascript
+          # If you wish to specify custom queries, you can do so here or in a config file.
+          # By default, queries listed here will override any specified in a config file.
+          # Prefix the list here with "+" to use these queries and those in the config file.
+          # queries: ./path/to/local/query, your-org/your-repo/queries@main
+
+      - name: Setup Node 💿
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 14
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install development dependencies 📚
+        run: npm ci --prefer-offline --no-audit --ignore-scripts
+      - name: Build library 📦
+        run: npm run build
+      - name: Perform CodeQL Analysis 🔬
+        uses: github/codeql-action/analyze@v1
+
+  shift-left-analysis:
+    # This workflow integrates Scan with GitHub's code scanning feature
+    # Scan is a free open-source security tool for modern DevOps teams from ShiftLeft
+    # Visit https://slscan.io/en/latest/integrations/code-scan for help
+    name: Shift Left
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 📥
+        uses: actions/checkout@v2.4.0
+      - name: Setup Node 💿
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 14
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install development dependencies 📚
+        run: npm ci --prefer-offline --no-audit --ignore-scripts
+      - name: Build library 📦
+        run: npm run build
+
+      - name: Perform Scan 👁️
+        uses: ShiftLeftSecurity/scan-action@master
+        env:
+          WORKSPACE: ''
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          output: reports
+          # Scan auto-detects the languages in your project. To override uncomment the below variable and set the type
+          # type: credscan,java
+          # type: python
+
+      - name: Upload report 📤
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: reports
