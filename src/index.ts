@@ -1,3 +1,5 @@
-const version = '0.0.0';
+import { dirTree } from './dir-tree';
 
-export { version };
+export default dirTree;
+
+export * from './tree-element';
