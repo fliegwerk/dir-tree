@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/fliegwerk/dir-tree/compare/v0.2.1...v1.0.0) (2022-02-08)
+
+
+### Miscellaneous Chores
+
+* release 1.0.0 ([9e1c3ef](https://github.com/fliegwerk/dir-tree/commit/9e1c3ef30b9cc35b97b713bf32a1ef6822332ffb))
+
 ### [0.2.1](https://github.com/fliegwerk/dir-tree/compare/v0.2.0...v0.2.1) (2022-02-07)
 
 
